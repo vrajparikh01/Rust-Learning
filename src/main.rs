@@ -26,4 +26,26 @@ fn main() {
     // String types
     let greeting = String::from("Hello World");
     println!("{}", greeting);
+
+    // Conditionals 
+    let is_even = false;
+    if is_even {
+        println!("Variable is even");
+    } else {
+        println!("Variable is odd");
+    }
+
+    let first_name = get_first_name(String::from("Vraj Parikh"));
+    println!("First name: {}", first_name);
+}
+
+pub fn get_first_name(str: String) -> String {
+    let mut first_name = String::from("");
+    for c in str.chars() {
+        if c == ' ' {
+            break
+        }
+        first_name.push(c);
+    }
+    return first_name;
 }
