@@ -1,0 +1,29 @@
+fn main() {
+    // Variables
+    // Integer types
+    let x = -5;
+    let y: u32 = 1000;
+    let z: f32 = 3.14;
+    println!("x = {}", x);
+    println!("y = {}", y);
+    println!("z = {}", z);
+
+    // Boolean types
+    let is_male = true;
+    let is_above_18 = true;
+    
+    if is_male {
+        println!("You are a male");
+
+    } else {
+        println!("You are not a male");
+    }
+
+    if is_male && is_above_18 {
+        println!("You are a legal male");
+    }
+
+    // String types
+    let greeting = String::from("Hello World");
+    println!("{}", greeting);
+}
