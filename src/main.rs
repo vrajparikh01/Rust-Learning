@@ -37,6 +37,12 @@ fn main() {
 
     let first_name = get_first_name(String::from("Vraj Parikh"));
     println!("First name: {}", first_name);
+
+    // Memory Management
+    // Immutability
+    let mut x: i32 = 1;
+    x = 2; // No error
+    println!("Mutable Variable: {}", x);
 }
 
 pub fn get_first_name(str: String) -> String {
