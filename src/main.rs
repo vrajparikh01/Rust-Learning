@@ -47,6 +47,7 @@ fn main() {
     // Stack vs Heap
     stack_fn();
     heap_fn();
+    update_string();
 }
 
 pub fn get_first_name(str: String) -> String {
@@ -74,4 +75,16 @@ fn heap_fn() {
     let s2 = String::from("World");
     let combined = format!("{} {}", s1, s2);
     println!("Heap function: Combined string is '{}'", combined);
+}
+
+fn update_string() {
+    // Start with a base string on the heap
+    let mut s = String::from("Initial string");
+    println!("Before update: {}", s);
+    println!("Capacity: {}, Length: {}, Pointer: {:?}", s.capacity(), s.len(), s.as_ptr());
+
+    // Append some text to the string
+    s.push_str(" and some additional text");
+    println!("After update: {}", s);
+    println!("Capacity: {}, Length: {}, Pointer: {:?}", s.capacity(), s.len(), s.as_ptr());
 }
