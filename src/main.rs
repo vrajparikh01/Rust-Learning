@@ -1,3 +1,14 @@
+struct Rect {
+   width: u32,
+   height: u32,
+}
+
+impl Rect {
+    fn area(&self) -> u32 {
+         self.width * self.height
+    }
+}
+
 fn main() {
     // Variables
     // Integer types
@@ -71,6 +82,28 @@ fn main() {
     println!("{}", s1);
     println!("{}", s2);
     println!("{}", s3);
+
+    // Structs
+    struct User {
+        active: bool,
+        username: String,
+        email: String,
+        sign_in_count: u64,
+    }
+
+    let user1 = User {
+        active: true,
+        username: String::from("Vraj"),
+        email: String::from("vraj@gmail.com"),
+        sign_in_count: 1,
+    };
+    println!("User 1 username: {:?}", user1.username);
+
+    let rect = Rect {
+        width: 30,
+        height: 50,
+    };
+    println!("The area of the rectangle is {}", rect.area());
 }
 
 pub fn get_first_name(str: String) -> String {
