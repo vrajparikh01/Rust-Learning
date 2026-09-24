@@ -48,6 +48,15 @@ fn main() {
     stack_fn();
     heap_fn();
     update_string();
+
+    // Ownership
+    let s1 = String::from("hello");
+    let s2 = s1;
+    // println!("{}", s1); // This line would cause a compile error because ownership has been moved.
+
+    let my_string = String::from("hello");
+    takes_ownership(my_string.clone()); // Pass a clone of the string to the function
+    println!("{}", my_string); // This line would cause a compile error because ownership has been moved if clone was not used.
 }
 
 pub fn get_first_name(str: String) -> String {
@@ -87,4 +96,8 @@ fn update_string() {
     s.push_str(" and some additional text");
     println!("After update: {}", s);
     println!("Capacity: {}, Length: {}, Pointer: {:?}", s.capacity(), s.len(), s.as_ptr());
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string); // `some_string` now owns the data.
 }
