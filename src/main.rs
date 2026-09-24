@@ -57,6 +57,20 @@ fn main() {
     let my_string = String::from("hello");
     takes_ownership(my_string.clone()); // Pass a clone of the string to the function
     println!("{}", my_string); // This line would cause a compile error because ownership has been moved if clone was not used.
+
+    // Borrowing and References
+    let mut s1 = String::from("Hello");
+    // let s2 = &mut s1; // compile error because you cannot have more than one mutable reference at a time
+    update_word(&mut s1);
+    println!("{}", s1);
+
+    // There can be many immutable references to a variable, but only one mutable reference at a time.
+    let s1 = String::from("Hello");
+    let s2 = &s1;
+    let s3 = &s1;
+    println!("{}", s1);
+    println!("{}", s2);
+    println!("{}", s3);
 }
 
 pub fn get_first_name(str: String) -> String {
@@ -100,4 +114,8 @@ fn update_string() {
 
 fn takes_ownership(some_string: String) {
     println!("{}", some_string); // `some_string` now owns the data.
+}
+
+fn update_word(word: &mut String) {
+    word.push_str(" World");
 }
