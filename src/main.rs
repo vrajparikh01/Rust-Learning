@@ -1,3 +1,5 @@
+use std::fs;
+
 struct Rect {
    width: u32,
    height: u32,
@@ -6,6 +8,21 @@ struct Rect {
 impl Rect {
     fn area(&self) -> u32 {
          self.width * self.height
+    }
+}
+
+enum Shape {
+    Circle(f64),  // Variant with associated data (radius)
+    Square(f64),  // Variant with associated data (side length)
+    Rectangle(f64, f64),  // Variant with associated data (width, height)
+}
+
+// Function to calculate area based on the shape
+fn calculate_area(shape: Shape) -> f64 {
+    match shape {
+        Shape::Circle(radius) => std::f64::consts::PI * radius * radius,
+        Shape::Square(side_length) => side_length * side_length,
+        Shape::Rectangle(width, height) => width * height,
     }
 }
 
@@ -104,6 +121,35 @@ fn main() {
         height: 50,
     };
     println!("The area of the rectangle is {}", rect.area());
+
+    // Enums and Pattern Matching
+    let circle = Shape::Circle(5.0);
+    let square = Shape::Square(4.0);
+    let rectangle = Shape::Rectangle(3.0, 6.0);
+
+    // Calculate and print the areas
+    println!("Area of circle: {}", calculate_area(circle));
+    println!("Area of square: {}", calculate_area(square));
+    println!("Area of rectangle: {}", calculate_area(rectangle));
+
+    // Error Handling
+    let greeting_file_result = fs::read_to_string("hello.txt");
+
+    match greeting_file_result {
+        Ok(file_content) => {
+            println!("File read successfully: {:?}", file_content);
+        },
+        Err(error) => {
+            println!("Failed to read file: {:?}", error);
+        }
+    }
+
+    // Option Enums
+    let my_string = String::from("raman");
+    match find_first_a(my_string) {
+        Some(index) => println!("The letter 'a' is found at index: {}", index),
+        None => println!("The letter 'a' is not found in the string."),
+    }
 }
 
 pub fn get_first_name(str: String) -> String {
@@ -151,4 +197,13 @@ fn takes_ownership(some_string: String) {
 
 fn update_word(word: &mut String) {
     word.push_str(" World");
+}
+
+fn find_first_a(s: String) -> Option<i32> {
+    for (index, character) in s.chars().enumerate() {
+        if character == 'a' {
+            return Some(index as i32);
+        }
+    }
+    return None;
 }
