@@ -78,6 +78,28 @@ fn main() {
     let v5_iter2 = v5_iter.filter(|x| *x % 2 != 0).map(|x| x * 2);
     let v5_vec: Vec<i32> = v5_iter2.collect();
     println!("Assignment: {:?}", v5_vec);
+
+    // STRING vs SLICE (&str)
+    println!("--------String vs Slice--------");
+    let mut s1 = String::from("Vraj");
+    println!("{}", s1);
+
+    s1.push_str(" Parikh");
+    println!("{}", s1);
+
+    s1.replace_range(5..s1.len(), "");
+    println!("{}", s1);
+
+    // Slices are references to a part of a string
+    let s2 = &s1[0..5];
+    println!("Slice: {}", s2);
+
+    let v = vec![1, 2, 3];
+    println!("{:?}", &v[1..2]);
+
+    // String literals are slices but points directly to the binary
+    let literal_string = "Hello, World!";
+    println!("{}", literal_string);
 }
 
 fn even_nos(vec: &Vec<i32>) -> Vec<i32> {
