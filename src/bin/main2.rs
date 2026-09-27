@@ -1,4 +1,4 @@
-use std::{collections::HashMap};
+use std::{collections::HashMap, fmt::Display, sync::mpsc, thread};
 
 fn main() {
     println!("Hello World 2!");
@@ -35,6 +35,49 @@ fn main() {
 
     let input_vec = vec![(String::from("Vraj"), 23), (String::from("Raj"), 30)];
     println!("{:?}", group_values_by_keys(input_vec));
+    
+    // ITERATORS
+    println!("--------Iterators--------");
+    let v1 = vec![1, 2, 3];
+    let v1_iter = v1.iter();
+    for val in v1_iter {
+        println!("{}", val);
+    }
+
+    // how .iter works under the hood
+    let mut v1_iter2 = v1.iter();
+    while let Some(val) = v1_iter2.next() {
+        print!("{}", val);
+    }
+
+    // mutable iterators
+    let mut v2 = vec![1, 2, 3];
+    let v2_iter = v2.iter_mut();
+    for val in v2_iter {
+        *val += 1;
+    }
+    println!("{:?}", v2);
+
+    // Consuming adaptors
+    let v3 = vec![1, 2, 3];
+    let total: i32 = v3.iter().sum();
+    println!("Total is: {}", total);
+    // let sum2 = v3.iter().sum(); // this will give error as v3 is moved in above line
+
+    // Iterators adaptors
+    let v4 = vec![1, 2, 3];
+    let v4_iter = v4.iter();
+    let v4_iter2 = v4_iter.map(|x| x + 1);
+    for val in v4_iter2 {
+        println!("{}", val);
+    }
+
+    // Assignment: filter the odd numbers then double each value and create a new vector
+    let v5 = vec![1, 2, 3, 4, 5];
+    let v5_iter = v5.iter();
+    let v5_iter2 = v5_iter.filter(|x| *x % 2 != 0).map(|x| x * 2);
+    let v5_vec: Vec<i32> = v5_iter2.collect();
+    println!("Assignment: {:?}", v5_vec);
 }
 
 fn even_nos(vec: &Vec<i32>) -> Vec<i32> {
