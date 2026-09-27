@@ -100,6 +100,21 @@ fn main() {
     // String literals are slices but points directly to the binary
     let literal_string = "Hello, World!";
     println!("{}", literal_string);
+
+    // GENERICS
+    println!("--------Generics--------");
+    let bigger = largest(1, 2);
+    let bigger2 = largest("Vraj", "Parikh");
+    println!("Bigger: {}", bigger);
+    println!("Bigger2: {}", bigger2);
+}
+
+fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
+    if a > b {
+        a
+    } else {
+        b
+    }
 }
 
 fn even_nos(vec: &Vec<i32>) -> Vec<i32> {
