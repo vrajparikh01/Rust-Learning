@@ -116,6 +116,25 @@ fn main() {
     };
     // println!("{}", user.summarize());
     notify(user);
+
+    // LIFETIMES
+    println!("--------Lifetimes--------");
+    let longest_str;
+
+    let str1 = String::from("small");
+    {
+        let str2 = String::from("longest");
+        longest_str = longest(&str1,&str2, "Generics, Traits, Lifetimes together");
+        println!("{}", longest_str);
+    }
+
+    // STRUCT LIFETIME
+    println!("--------Struct Lifetimes--------");
+    let name = String::from("Vraj");
+    let user2 = User2 {
+        name: &name,
+    };
+    println!("{}", user2.name);
 }
 
 struct User2<'a>{
