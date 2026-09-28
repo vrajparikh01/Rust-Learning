@@ -135,6 +135,26 @@ fn main() {
         name: &name,
     };
     println!("{}", user2.name);
+
+    // MULTITHREADING
+    println!("--------Multithreading--------");
+
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("Hi number {} from the spawned thread", i);
+        }
+    });
+
+    for i in 1..50 {
+        println!("Hi number {} from the main thread", i);
+    }
+    handle.join();
+
+    let v10 = vec![1, 2, 3];
+    let handle2 = thread::spawn(move || {
+        println!("Moved {:?}", v10);
+    });
+    handle2.join();
 }
 
 struct User2<'a>{
