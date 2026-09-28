@@ -107,6 +107,66 @@ fn main() {
     let bigger2 = largest("Vraj", "Parikh");
     println!("Bigger: {}", bigger);
     println!("Bigger2: {}", bigger2);
+
+    // TRAITS
+    println!("--------Traits--------");
+    let user = User {
+        name: String::from("Vraj"),
+        age: 23,
+    };
+    // println!("{}", user.summarize());
+    notify(user);
+}
+
+struct User2<'a>{
+    name: &'a str,
+}
+
+fn longest<'a, T>(first: &'a str, second: &'a str, ann: T) -> &'a str where T: Display {
+    println!("Announcement: {}", ann);
+    if first.len() > second.len() {
+        return first
+    } else {
+        return second
+    }
+}
+
+trait Summary {
+    fn summarize(&self) -> String;
+}
+
+trait Fix {
+    fn fix(&self) -> String {
+        return String::from("Hi there from Fix trait");
+    }
+}
+
+struct User {
+    name: String,
+    age: u32,
+}
+
+// implementing trait on the struct
+impl Summary for User{
+    fn summarize(&self) -> String {
+        // format used to concatenate strings
+        format!("Name: {}, Age: {}", self.name, self.age)
+    }
+}
+
+// if no implementation fn is provided, default implementation is used from the trait
+impl Fix for User {}
+
+// Taking a trait as a parameter
+// fn notify(item: impl Summary) {
+//     println!("Breaking news! {}", item.summarize());
+// }
+
+// Using trait bounds to specify multiple traits
+// taks generic type T which implements Summary and Fix
+fn notify<T: Summary + Fix>(item: T) {
+    println!("Breaking news! {}", item.summarize());
+    println!("Fixed! {}", item.fix());
 }
 
 fn largest<T: std::cmp::PartialOrd>(a: T, b: T) -> T {
