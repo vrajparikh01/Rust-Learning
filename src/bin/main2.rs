@@ -155,6 +155,18 @@ fn main() {
         println!("Moved {:?}", v10);
     });
     handle2.join();
+
+    // MESSAGE PASSING
+    println!("--------Message Passing--------");
+
+    let (tx, rx) = mpsc::channel();
+    thread::spawn(move || {
+        let val = String::from("Hello World");
+        tx.send(val).unwrap();
+    });
+
+    let received = rx.recv().unwrap();
+    println!("Received: {}", received);
 }
 
 struct User2<'a>{
